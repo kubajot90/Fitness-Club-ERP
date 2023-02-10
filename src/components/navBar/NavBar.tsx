@@ -13,15 +13,15 @@ const NavBar = () => {
     palette: {
       mode: "light",
       primary: {
-        main: "#ffffff",
+        main: "#fafafa",
       },
     },
   });
 
   return (
     <ThemeProvider theme={lightTheme}>
-      <Box sx={{ flexGrow: 1 }} mb={1}>
-        <AppBar position="static">
+      <Box sx={{ flexGrow: 1, zIndex: 999 }}>
+        <AppBar position="relative">
           <Toolbar>
             <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
               Fitness Club
@@ -43,4 +43,3 @@ const NavBar = () => {
 };
 
 export default NavBar;
-// enableColorOnDark/

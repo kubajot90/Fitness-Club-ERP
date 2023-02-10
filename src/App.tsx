@@ -1,11 +1,11 @@
-import SideMenu from "./components/sideMenu/SideMenu";
 import NavBar from "./components/navBar/NavBar";
+import Main from "./components/main/Main";
 
 function App() {
   return (
     <>
       <NavBar />
-      <SideMenu />
+      <Main />
     </>
   );
 }

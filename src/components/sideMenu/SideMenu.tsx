@@ -10,10 +10,11 @@ import HomeIcon from "@mui/icons-material/Home";
 import PeopleIcon from "@mui/icons-material/People";
 import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
 import QueryStatsIcon from "@mui/icons-material/QueryStats";
+import ArrowIcon from "./ArrowIcon";
 
 const SideMenu = () => {
   return (
-    <Box sx={{ width: "100%", maxWidth: 360, bgcolor: "background.paper" }}>
+    <Box sx={{ width: "100%", maxWidth: 360 }}>
       <nav aria-label="main mailbox folders">
         <List>
           <ListItem disablePadding>
@@ -22,6 +23,7 @@ const SideMenu = () => {
                 <HomeIcon />
               </ListItemIcon>
               <ListItemText primary="Start" />
+              <ArrowIcon />
             </ListItemButton>
           </ListItem>
           <Divider />
@@ -31,6 +33,7 @@ const SideMenu = () => {
                 <PeopleIcon />
               </ListItemIcon>
               <ListItemText primary="Members" />
+              <ArrowIcon />
             </ListItemButton>
           </ListItem>
           <Divider />
@@ -40,6 +43,7 @@ const SideMenu = () => {
                 <CalendarMonthIcon />
               </ListItemIcon>
               <ListItemText primary="Calendar" />
+              <ArrowIcon />
             </ListItemButton>
           </ListItem>
           <Divider />
@@ -49,6 +53,7 @@ const SideMenu = () => {
                 <QueryStatsIcon />
               </ListItemIcon>
               <ListItemText primary="Statistics" />
+              <ArrowIcon />
             </ListItemButton>
           </ListItem>
           <Divider />
