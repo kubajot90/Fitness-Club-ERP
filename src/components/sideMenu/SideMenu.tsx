@@ -1,4 +1,6 @@
 import * as React from "react";
+import { useNavigate } from "react-router-dom";
+
 import Box from "@mui/material/Box";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
@@ -13,12 +15,22 @@ import QueryStatsIcon from "@mui/icons-material/QueryStats";
 import ArrowIcon from "./ArrowIcon";
 
 const SideMenu = () => {
+  const navigate = useNavigate();
+
+  const setPath = (
+    event: React.MouseEvent<HTMLDivElement, MouseEvent>,
+    path: string
+  ) => {
+    navigate(path);
+    window.scrollTo(0, 0);
+  };
+
   return (
     <Box sx={{ width: "100%", maxWidth: 360 }}>
       <nav aria-label="main mailbox folders">
         <List>
           <ListItem disablePadding>
-            <ListItemButton>
+            <ListItemButton onClick={(e) => setPath(e, "/")}>
               <ListItemIcon>
                 <HomeIcon />
               </ListItemIcon>
@@ -28,7 +40,7 @@ const SideMenu = () => {
           </ListItem>
           <Divider />
           <ListItem disablePadding>
-            <ListItemButton>
+            <ListItemButton onClick={(e) => setPath(e, "members")}>
               <ListItemIcon>
                 <PeopleIcon />
               </ListItemIcon>
@@ -38,7 +50,7 @@ const SideMenu = () => {
           </ListItem>
           <Divider />
           <ListItem disablePadding>
-            <ListItemButton>
+            <ListItemButton onClick={(e) => setPath(e, "calendar")}>
               <ListItemIcon>
                 <CalendarMonthIcon />
               </ListItemIcon>
@@ -48,7 +60,7 @@ const SideMenu = () => {
           </ListItem>
           <Divider />
           <ListItem disablePadding>
-            <ListItemButton>
+            <ListItemButton onClick={(e) => setPath(e, "statistics")}>
               <ListItemIcon>
                 <QueryStatsIcon />
               </ListItemIcon>
