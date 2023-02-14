@@ -7,7 +7,7 @@ const Main = () => {
     <Container
       disableGutters
       maxWidth={false}
-      sx={{ display: "flex", width: 1, height: "100vh" }}
+      sx={{ display: "flex", width: 1 }}
     >
       <SideMenu />
       <PreviewArea />

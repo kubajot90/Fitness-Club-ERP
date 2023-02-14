@@ -1,5 +1,6 @@
 import * as React from "react";
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
+import useSetPath from "../../hooks/useSetPath";
 
 import Box from "@mui/material/Box";
 import List from "@mui/material/List";
@@ -15,22 +16,14 @@ import QueryStatsIcon from "@mui/icons-material/QueryStats";
 import ArrowIcon from "./ArrowIcon";
 
 const SideMenu = () => {
-  const navigate = useNavigate();
-
-  const setPath = (
-    event: React.MouseEvent<HTMLDivElement, MouseEvent>,
-    path: string
-  ) => {
-    navigate(path);
-    window.scrollTo(0, 0);
-  };
+  const setPath = useSetPath();
 
   return (
     <Box sx={{ width: "100%", maxWidth: 360 }}>
       <nav aria-label="main mailbox folders">
         <List>
           <ListItem disablePadding>
-            <ListItemButton onClick={(e) => setPath(e, "/")}>
+            <ListItemButton onClick={() => setPath("/")}>
               <ListItemIcon>
                 <HomeIcon />
               </ListItemIcon>
@@ -40,7 +33,7 @@ const SideMenu = () => {
           </ListItem>
           <Divider />
           <ListItem disablePadding>
-            <ListItemButton onClick={(e) => setPath(e, "members")}>
+            <ListItemButton onClick={() => setPath("members")}>
               <ListItemIcon>
                 <PeopleIcon />
               </ListItemIcon>
@@ -50,7 +43,7 @@ const SideMenu = () => {
           </ListItem>
           <Divider />
           <ListItem disablePadding>
-            <ListItemButton onClick={(e) => setPath(e, "calendar")}>
+            <ListItemButton onClick={() => setPath("calendar")}>
               <ListItemIcon>
                 <CalendarMonthIcon />
               </ListItemIcon>
@@ -60,7 +53,7 @@ const SideMenu = () => {
           </ListItem>
           <Divider />
           <ListItem disablePadding>
-            <ListItemButton onClick={(e) => setPath(e, "statistics")}>
+            <ListItemButton onClick={() => setPath("statistics")}>
               <ListItemIcon>
                 <QueryStatsIcon />
               </ListItemIcon>
