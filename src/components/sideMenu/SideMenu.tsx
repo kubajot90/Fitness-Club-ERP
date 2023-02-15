@@ -25,7 +25,7 @@ const SideMenu = () => {
           <ListItem disablePadding>
             <ListItemButton onClick={() => setPath("/")}>
               <ListItemIcon>
-                <HomeIcon />
+                <HomeIcon color="primary" />
               </ListItemIcon>
               <ListItemText primary="Start" />
               <ArrowIcon />
@@ -35,7 +35,7 @@ const SideMenu = () => {
           <ListItem disablePadding>
             <ListItemButton onClick={() => setPath("members")}>
               <ListItemIcon>
-                <PeopleIcon />
+                <PeopleIcon color="primary" />
               </ListItemIcon>
               <ListItemText primary="Members" />
               <ArrowIcon />
@@ -45,7 +45,7 @@ const SideMenu = () => {
           <ListItem disablePadding>
             <ListItemButton onClick={() => setPath("calendar")}>
               <ListItemIcon>
-                <CalendarMonthIcon />
+                <CalendarMonthIcon color="primary" />
               </ListItemIcon>
               <ListItemText primary="Calendar" />
               <ArrowIcon />
@@ -55,7 +55,7 @@ const SideMenu = () => {
           <ListItem disablePadding>
             <ListItemButton onClick={() => setPath("statistics")}>
               <ListItemIcon>
-                <QueryStatsIcon />
+                <QueryStatsIcon color="primary" />
               </ListItemIcon>
               <ListItemText primary="Statistics" />
               <ArrowIcon />

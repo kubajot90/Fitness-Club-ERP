@@ -13,7 +13,7 @@ const NavBar = () => {
     palette: {
       mode: "light",
       primary: {
-        main: "#fafafa",
+        main: "#00064b",
       },
     },
   });
@@ -22,7 +22,7 @@ const NavBar = () => {
     <ThemeProvider theme={lightTheme}>
       <Box sx={{ flexGrow: 1, zIndex: 999 }}>
         <AppBar position="relative">
-          <Toolbar>
+          <Toolbar variant="dense">
             <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
               Fitness Club
             </Typography>

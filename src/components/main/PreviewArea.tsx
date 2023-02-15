@@ -4,6 +4,7 @@ import Start from "./categories/start/Start";
 import Calendar from "./categories/calendar/Calendar";
 import Members from "./categories/members/Members";
 import Statistics from "./categories/statistics/Statistics";
+import BreadCrumbs from "./BreadCrumbs";
 
 const PreviewArea = () => {
   return (
@@ -12,9 +13,10 @@ const PreviewArea = () => {
         minHeight: "100vh",
         width: 1,
         padding: 3,
-        backgroundColor: " rgb(241, 241, 241)",
+        backgroundColor: " rgb(234, 245, 255)",
       }}
     >
+      <BreadCrumbs />
       <Routes>
         <Route path="/" element={<Start />} />
         <Route path="/members" element={<Members />} />
