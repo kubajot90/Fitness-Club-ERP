@@ -31,17 +31,19 @@ export default function BreadCrumbs() {
       <Breadcrumbs
         aria-label="breadcrumb"
         sx={{
-          marginBottom: 3,
+          marginBottom: 2,
         }}
       >
         <Link underline="hover" color="inherit">
           Start
         </Link>
-        <Link underline="hover" color="text.primary" aria-current="page">
-          {pathName}
-        </Link>
+        {pathName && (
+          <Link underline="hover" color="text.primary" aria-current="page">
+            {pathName}
+          </Link>
+        )}
       </Breadcrumbs>
-      <Divider sx={{ marginBottom: 2, opacity: 0.5 }} />
+      <Divider sx={{ marginBottom: 3, opacity: 0.5 }} />
     </div>
   );
 }

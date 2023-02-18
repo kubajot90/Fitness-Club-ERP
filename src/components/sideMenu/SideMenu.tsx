@@ -1,5 +1,4 @@
 import * as React from "react";
-// import { useNavigate } from "react-router-dom";
 import useSetPath from "../../hooks/useSetPath";
 
 import Box from "@mui/material/Box";
@@ -19,9 +18,16 @@ const SideMenu = () => {
   const setPath = useSetPath();
 
   return (
-    <Box sx={{ width: "100%", maxWidth: 360 }}>
+    <Box
+      sx={{
+        width: "100%",
+        maxWidth: 360,
+        position: "fixed",
+        marginTop: "48px",
+      }}
+    >
       <nav aria-label="main mailbox folders">
-        <List>
+        <List sx={{ paddingTop: "0" }}>
           <ListItem disablePadding>
             <ListItemButton onClick={() => setPath("/")}>
               <ListItemIcon>

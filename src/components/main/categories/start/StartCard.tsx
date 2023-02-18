@@ -29,15 +29,13 @@ const ExpandMore = styled((props: ExpandMoreProps) => {
   }),
 }));
 
-export default function StartCard({
-  avatar,
-  title,
-  path,
-}: {
+interface StartCardProps {
   avatar: React.ReactNode;
   title: string;
   path: string;
-}) {
+}
+
+export default function StartCard({ avatar, title, path }: StartCardProps) {
   const setPath = useSetPath();
   const [expanded, setExpanded] = React.useState(false);
 
