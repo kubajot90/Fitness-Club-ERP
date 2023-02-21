@@ -1,10 +1,16 @@
-import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { membersActions } from "../../../../store/membersSlice";
 
-const useMembers: () => void = () => {
-  const [members, setMembers] = useState<string>("cos");
-  const addMember = () => {
-    console.log("dziala");
-    console.log(members);
+interface AddMember {
+  addMember: () => void;
+  removeMember: () => void;
+}
+
+const useMembers: () => AddMember = () => {
+  const dispatch = useDispatch();
+
+  const addMember: () => void = () => {
+    dispatch(membersActions.addMember());
   };
 
   const removeMember = () => {
