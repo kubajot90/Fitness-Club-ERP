@@ -1,16 +1,20 @@
 import { useDispatch } from "react-redux";
 import { membersActions } from "../../../../store/membersSlice";
 
-interface AddMember {
-  addMember: () => void;
+interface UseMembers {
+  addMember: (formData: {}) => void;
   removeMember: () => void;
 }
 
-const useMembers: () => AddMember = () => {
+interface UseMemberProps {
+  formData: {};
+}
+
+const useMembers: () => UseMembers = () => {
   const dispatch = useDispatch();
 
-  const addMember: () => void = () => {
-    dispatch(membersActions.addMember());
+  const addMember = (formData: {}) => {
+    dispatch(membersActions.addMember(formData));
   };
 
   const removeMember = () => {

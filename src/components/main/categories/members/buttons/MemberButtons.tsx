@@ -8,8 +8,6 @@ interface MemberButtonsProps {
 }
 
 const MembersButtons = ({ onToggleAddModal }: MemberButtonsProps) => {
-  // const { addMember } = useMembers();
-
   const clickHandler = () => {
     onToggleAddModal();
   };

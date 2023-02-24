@@ -13,12 +13,36 @@ interface AddMemberModalProps {
   isOpenAddModal: boolean;
 }
 
+interface IFormData {
+  name?: string;
+  surname?: string;
+  email?: string;
+  age?: string;
+  gender?: string;
+}
+
 const AddMemberModal = ({ isOpenAddModal }: AddMemberModalProps) => {
   const [isOpen, setIsOpen] = useState(isOpenAddModal);
-  const addMember = useMembers();
+  const [formData, setFormData] = useState<IFormData>({});
+
+  const addMemberHook = useMembers();
+
+  const textFieldStyle = {
+    width: "100%",
+    margin: "12px 0",
+  };
+
+  const formDataHandler = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    const inputName: string = e.target.name;
+    const inputValue: string = e.target.value;
+
+    setFormData({ ...formData, [inputName]: inputValue });
+  };
 
   const submitForm = () => {
-    addMember.addMember();
+    addMemberHook.addMember(formData);
   };
 
   const toggleModal: () => void = () => {
@@ -28,11 +52,6 @@ const AddMemberModal = ({ isOpenAddModal }: AddMemberModalProps) => {
   useEffect(() => {
     toggleModal();
   }, [isOpenAddModal]);
-
-  const textFieldStyle = {
-    width: "100%",
-    margin: "12px 0",
-  };
 
   return (
     <>
@@ -50,29 +69,36 @@ const AddMemberModal = ({ isOpenAddModal }: AddMemberModalProps) => {
         >
           <FormControl fullWidth>
             <TextField
+              onChange={(e) => formDataHandler(e)}
               id="name"
+              name="name"
               label="Name"
               type="text"
               size="small"
               style={textFieldStyle}
             />
             <TextField
+              onChange={(e) => formDataHandler(e)}
               id="surname"
+              name="surname"
               label="surname"
               type="text"
               size="small"
               style={textFieldStyle}
             />
             <TextField
+              onChange={(e) => formDataHandler(e)}
               id="email"
+              name="email"
               label="Email"
               type="text"
               size="small"
               style={textFieldStyle}
             />
-
             <TextField
+              onChange={(e) => formDataHandler(e)}
               id="age"
+              name="age"
               label="Age"
               type="number"
               size="small"
@@ -80,7 +106,9 @@ const AddMemberModal = ({ isOpenAddModal }: AddMemberModalProps) => {
               style={textFieldStyle}
             />
             <TextField
+              onChange={(e) => formDataHandler(e)}
               id="gender"
+              name="gender"
               select
               label="Gender"
               size="small"

@@ -1,13 +1,31 @@
-import { createSlice, current } from "@reduxjs/toolkit";
+import { createSlice, current, PayloadAction } from "@reduxjs/toolkit";
+
+export interface memberState {
+  members: IFormData[];
+}
+
+interface IFormData {
+  name?: string;
+  surname?: string;
+  email?: string;
+  age?: string;
+  gender?: string;
+}
+
+const initialState: memberState = {
+  members: [],
+};
 
 export const membersSlice = createSlice({
   name: "members",
-  initialState: {
-    members: [],
-  },
+  initialState,
+
   reducers: {
-    addMember() {
-      console.log("add member in store");
+    addMember(state, action: PayloadAction<IFormData>) {
+      const formData = action.payload;
+      state.members = [...state.members, formData];
+
+      console.log("state: ", current(state));
     },
     // addToCart(state, action) {
     //   state.productsInCart = [...state.productsInCart, action.payload];
