@@ -1,8 +1,8 @@
 import * as React from "react";
-import { useEffect } from "react";
+import { useState, useEffect } from "react";
 import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
-import Button from "@mui/material/Button";
+import Loader from "./loader/Loader";
 
 const style = {
   position: "absolute" as "absolute",
@@ -23,15 +23,29 @@ interface NestedModalProps {
   isOpen: boolean;
   onToggleModal: () => void;
   children: React.ReactNode;
+  showLoader: boolean;
 }
 
 export default function NestedModal({
   isOpen,
   onToggleModal,
   children,
+  showLoader,
 }: NestedModalProps) {
+  // const [showLoader, setShowLoader] = useState(false);
+  // const [isLoaderVisible, setIsLoaderVisible] = useState(false);
+
+  // const showLoader = () => {
+  //   setIsLoaderVisible(true);
+  //   const timer = setTimeout(() => {
+  //     setIsLoaderVisible(false);
+  //     onToggleModal();
+  //   }, 1000);
+  //   return () => clearTimeout(timer);
+  // };
+
   return (
-    <div>
+    <Box>
       <Modal
         open={isOpen}
         onClose={onToggleModal}
@@ -39,13 +53,10 @@ export default function NestedModal({
         aria-describedby="parent-modal-description"
       >
         <Box sx={{ ...style, width: "40%", maxWidth: 600 }}>
-          {/* <h2 id="parent-modal-title">Text in a modal</h2>
-          <p id="parent-modal-description">
-            Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
-          </p> */}
           {children}
+          {showLoader && <Loader onToggleModal={onToggleModal} />}
         </Box>
       </Modal>
-    </div>
+    </Box>
   );
 }

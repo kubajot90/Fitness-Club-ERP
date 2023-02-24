@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import useMembers from "./useMembers";
+import Loader from "../../../modal/loader/Loader";
 import Box from "@mui/material/Box";
 import FormControl from "@mui/material/FormControl";
 import Modal from "../../../modal/Modal";
@@ -8,6 +9,11 @@ import MenuItem from "@mui/material/MenuItem";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import ArrowUpwardIcon from "@mui/icons-material/ArrowUpward";
+
+const textFieldStyle = {
+  width: "100%",
+  margin: "12px 0",
+};
 
 interface AddMemberModalProps {
   isOpenAddModal: boolean;
@@ -24,13 +30,10 @@ interface IFormData {
 const AddMemberModal = ({ isOpenAddModal }: AddMemberModalProps) => {
   const [isOpen, setIsOpen] = useState(isOpenAddModal);
   const [formData, setFormData] = useState<IFormData>({});
+  const [showLoader, setShowLoader] = useState(false);
+  // const [isLoaderVisible, setIsLoaderVisible] = useState(false);
 
   const addMemberHook = useMembers();
-
-  const textFieldStyle = {
-    width: "100%",
-    margin: "12px 0",
-  };
 
   const formDataHandler = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -43,7 +46,18 @@ const AddMemberModal = ({ isOpenAddModal }: AddMemberModalProps) => {
 
   const submitForm = () => {
     addMemberHook.addMember(formData);
+    setShowLoader(true);
+    // showLoader();
   };
+
+  // const showLoader = () => {
+  //   setIsLoaderVisible(true);
+  //   const timer = setTimeout(() => {
+  //     setIsLoaderVisible(false);
+  //     toggleModal();
+  //   }, 1000);
+  //   return () => clearTimeout(timer);
+  // };
 
   const toggleModal: () => void = () => {
     setIsOpen((prev) => (prev = !prev));
@@ -55,7 +69,11 @@ const AddMemberModal = ({ isOpenAddModal }: AddMemberModalProps) => {
 
   return (
     <>
-      <Modal isOpen={isOpen} onToggleModal={toggleModal}>
+      <Modal
+        isOpen={isOpen}
+        onToggleModal={toggleModal}
+        showLoader={showLoader}
+      >
         <Typography variant="h6" gutterBottom>
           ADD MEMBER
         </Typography>
@@ -63,11 +81,12 @@ const AddMemberModal = ({ isOpenAddModal }: AddMemberModalProps) => {
           component="form"
           sx={{
             "& .MuiTextField-root": { m: 1, width: "25ch" },
+            position: "relative",
           }}
           noValidate
           autoComplete="off"
         >
-          <FormControl fullWidth>
+          <FormControl fullWidth id="addMemberForm">
             <TextField
               onChange={(e) => formDataHandler(e)}
               id="name"
@@ -116,9 +135,6 @@ const AddMemberModal = ({ isOpenAddModal }: AddMemberModalProps) => {
               helperText="select your gender"
               style={textFieldStyle}
             >
-              <MenuItem value="label" disabled>
-                {""}
-              </MenuItem>
               <MenuItem value="Male">{"Male"}</MenuItem>
               <MenuItem value="Female">{"Female"}</MenuItem>
             </TextField>
@@ -133,6 +149,7 @@ const AddMemberModal = ({ isOpenAddModal }: AddMemberModalProps) => {
               Submit
             </Button>
           </FormControl>
+          {/* {isLoaderVisible && <Loader />} */}
         </Box>
       </Modal>
     </>
