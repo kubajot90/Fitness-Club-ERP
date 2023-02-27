@@ -26,7 +26,6 @@ export default function Loader({ onToggleModal }: ModalProps) {
   const [isLoaderVisible, setIsLoaderVisible] = useState(false);
 
   useEffect(() => {
-    console.log("loader sie montuje");
     setIsLoaderVisible(true);
     const timer = setTimeout(() => {
       setIsLoaderVisible(false);
@@ -40,8 +39,8 @@ export default function Loader({ onToggleModal }: ModalProps) {
       {isLoaderVisible && (
         <Box sx={loaderStyle}>
           <CircularProgress />
-          <Typography variant="subtitle2" gutterBottom>
-            loading...
+          <Typography variant="subtitle2" gutterBottom sx={{ m: 1 }}>
+            Process...
           </Typography>
         </Box>
       )}

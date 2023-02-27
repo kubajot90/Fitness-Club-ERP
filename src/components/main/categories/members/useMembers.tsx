@@ -6,9 +6,9 @@ interface UseMembers {
   removeMember: () => void;
 }
 
-interface UseMemberProps {
-  formData: {};
-}
+// interface UseMemberProps {
+//   formData: {};
+// }
 
 const useMembers: () => UseMembers = () => {
   const dispatch = useDispatch();

@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import useMembers from "./useMembers";
-import Loader from "../../../modal/loader/Loader";
 import Box from "@mui/material/Box";
 import FormControl from "@mui/material/FormControl";
 import Modal from "../../../modal/Modal";
@@ -9,6 +8,8 @@ import MenuItem from "@mui/material/MenuItem";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import ArrowUpwardIcon from "@mui/icons-material/ArrowUpward";
+
+import { useForm, SubmitHandler } from "react-hook-form";
 
 const textFieldStyle = {
   width: "100%",
@@ -19,45 +20,42 @@ interface AddMemberModalProps {
   isOpenAddModal: boolean;
 }
 
-interface IFormData {
-  name?: string;
-  surname?: string;
-  email?: string;
-  age?: string;
-  gender?: string;
-}
+// interface IFormData {
+//   name?: string;
+//   surname?: string;
+//   email?: string;
+//   age?: string;
+//   gender?: string;
+// }
+
+type useFormData = {
+  name: string;
+  surname: string;
+  email: string;
+  age: number;
+  gender: string;
+};
 
 const AddMemberModal = ({ isOpenAddModal }: AddMemberModalProps) => {
   const [isOpen, setIsOpen] = useState(isOpenAddModal);
-  const [formData, setFormData] = useState<IFormData>({});
   const [showLoader, setShowLoader] = useState(false);
-  // const [isLoaderVisible, setIsLoaderVisible] = useState(false);
 
   const addMemberHook = useMembers();
 
-  const formDataHandler = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) => {
-    const inputName: string = e.target.name;
-    const inputValue: string = e.target.value;
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<useFormData>();
 
-    setFormData({ ...formData, [inputName]: inputValue });
-  };
+  const emailRegEx =
+    /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
-  const submitForm = () => {
+  const onSubmit: SubmitHandler<useFormData> = (formData) => {
     addMemberHook.addMember(formData);
     setShowLoader(true);
-    // showLoader();
+    console.log("form data:", formData);
   };
-
-  // const showLoader = () => {
-  //   setIsLoaderVisible(true);
-  //   const timer = setTimeout(() => {
-  //     setIsLoaderVisible(false);
-  //     toggleModal();
-  //   }, 1000);
-  //   return () => clearTimeout(timer);
-  // };
 
   const toggleModal: () => void = () => {
     setIsOpen((prev) => (prev = !prev));
@@ -65,6 +63,7 @@ const AddMemberModal = ({ isOpenAddModal }: AddMemberModalProps) => {
 
   useEffect(() => {
     toggleModal();
+    setShowLoader(false);
   }, [isOpenAddModal]);
 
   return (
@@ -88,59 +87,85 @@ const AddMemberModal = ({ isOpenAddModal }: AddMemberModalProps) => {
         >
           <FormControl fullWidth id="addMemberForm">
             <TextField
-              onChange={(e) => formDataHandler(e)}
               id="name"
-              name="name"
               label="Name"
               type="text"
               size="small"
               style={textFieldStyle}
+              {...register("name", {
+                required: { value: true, message: "Enter your name" },
+              })}
+              error={errors.name ? true : false}
+              helperText={errors.name?.message}
             />
             <TextField
-              onChange={(e) => formDataHandler(e)}
               id="surname"
-              name="surname"
               label="surname"
               type="text"
               size="small"
               style={textFieldStyle}
+              {...register("surname", {
+                required: { value: true, message: "Enter your surname" },
+              })}
+              error={errors.surname ? true : false}
+              helperText={errors.surname?.message}
             />
             <TextField
-              onChange={(e) => formDataHandler(e)}
               id="email"
-              name="email"
               label="Email"
               type="text"
               size="small"
               style={textFieldStyle}
+              {...register("email", {
+                required: { value: true, message: "Enter your email" },
+                pattern: {
+                  value: emailRegEx,
+                  message: "Invalid email address",
+                },
+              })}
+              error={errors.email ? true : false}
+              helperText={errors.email?.message}
             />
             <TextField
-              onChange={(e) => formDataHandler(e)}
               id="age"
-              name="age"
               label="Age"
               type="number"
               size="small"
               inputProps={{ min: 1, max: 100 }}
               style={textFieldStyle}
+              {...register("age", {
+                required: {
+                  value: true,
+                  message: "Enter your age",
+                },
+                valueAsNumber: true,
+              })}
+              error={errors.age ? true : false}
+              helperText={errors.age?.message}
             />
             <TextField
-              onChange={(e) => formDataHandler(e)}
               id="gender"
-              name="gender"
               select
               label="Gender"
               size="small"
-              defaultValue="label"
-              helperText="select your gender"
+              defaultValue=""
               style={textFieldStyle}
+              {...register("gender", {
+                required: {
+                  value: true,
+                  message: "Select your gender",
+                },
+              })}
+              error={errors.gender ? true : false}
+              helperText={errors.gender?.message}
             >
               <MenuItem value="Male">{"Male"}</MenuItem>
               <MenuItem value="Female">{"Female"}</MenuItem>
             </TextField>
 
             <Button
-              onClick={submitForm}
+              type="submit"
+              onClick={handleSubmit(onSubmit)}
               size="medium"
               variant="contained"
               startIcon={<ArrowUpwardIcon />}
@@ -149,7 +174,6 @@ const AddMemberModal = ({ isOpenAddModal }: AddMemberModalProps) => {
               Submit
             </Button>
           </FormControl>
-          {/* {isLoaderVisible && <Loader />} */}
         </Box>
       </Modal>
     </>

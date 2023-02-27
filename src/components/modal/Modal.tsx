@@ -32,18 +32,6 @@ export default function NestedModal({
   children,
   showLoader,
 }: NestedModalProps) {
-  // const [showLoader, setShowLoader] = useState(false);
-  // const [isLoaderVisible, setIsLoaderVisible] = useState(false);
-
-  // const showLoader = () => {
-  //   setIsLoaderVisible(true);
-  //   const timer = setTimeout(() => {
-  //     setIsLoaderVisible(false);
-  //     onToggleModal();
-  //   }, 1000);
-  //   return () => clearTimeout(timer);
-  // };
-
   return (
     <Box>
       <Modal
